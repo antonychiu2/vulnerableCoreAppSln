@@ -22,3 +22,11 @@ steps:
     publishWebProjects: true
     arguments: '-r win-x64 -o publishSCD'
     zipAfterPublish: false
+- task: HCLAppScan@1
+  inputs:
+    AppSecTestService: 'ASOC Creds'
+    applications: 'da95c1b0-b179-44e9-a7a2-feca877423bb'
+    scanname: 'dotNET core with sln attempt1'
+    scantype: 'static'
+    scanloc: 'publishSCD'
+    ScanSpeedOptions: 'thorough'
