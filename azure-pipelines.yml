@@ -26,7 +26,7 @@ steps:
   inputs:
     AppSecTestService: 'ASOC Creds'
     applications: 'da95c1b0-b179-44e9-a7a2-feca877423bb'
-    scanname: 'dotNET core with sln attempt1'
+    scanname: 'dotNET core with sln attempt2'
     scantype: 'static'
-    scanloc: 'publishSCD'
+    scanloc: 'publishSCD/s'
     ScanSpeedOptions: 'thorough'
