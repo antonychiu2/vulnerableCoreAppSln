@@ -1,0 +1,17 @@
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\bin\Debug\netcoreapp2.0\appsettings.Development.json
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\bin\Debug\netcoreapp2.0\appsettings.json
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\bin\Debug\netcoreapp2.0\bower.json
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\bin\Debug\netcoreapp2.0\bundleconfig.json
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\bin\Debug\netcoreapp2.0\VulnerableCoreApp.deps.json
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\bin\Debug\netcoreapp2.0\VulnerableCoreApp.runtimeconfig.json
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\bin\Debug\netcoreapp2.0\VulnerableCoreApp.runtimeconfig.dev.json
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\bin\Debug\netcoreapp2.0\VulnerableCoreApp.dll
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\bin\Debug\netcoreapp2.0\VulnerableCoreApp.pdb
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\obj\Debug\netcoreapp2.0\VulnerableCoreApp.csprojAssemblyReference.cache
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\obj\Debug\netcoreapp2.0\VulnerableCoreApp.AssemblyInfoInputs.cache
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\obj\Debug\netcoreapp2.0\VulnerableCoreApp.AssemblyInfo.cs
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\obj\Debug\netcoreapp2.0\VulnerableCoreApp.csproj.CoreCompileInputs.cache
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\obj\Debug\netcoreapp2.0\VulnerableCoreApp.dll
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\obj\Debug\netcoreapp2.0\VulnerableCoreApp.pdb
+C:\Users\Antony\Desktop\vulnerableCoreAppSln-main\obj\Debug\netcoreapp2.0\VulnerableCoreApp.genruntimeconfig.cache
