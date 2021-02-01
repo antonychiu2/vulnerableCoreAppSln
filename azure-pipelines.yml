@@ -9,6 +9,10 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+variables:
+  buildConfiguration: 'Release'
+
+steps:
 - task: HCLAppScan@1
   inputs:
     AppSecTestService: 'ASOC Creds'
