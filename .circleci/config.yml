@@ -25,7 +25,26 @@ jobs:
       - run:
           name: "Run Build step"
           command: dotnet.exe publish -c Release -r win-x64
-
-     
-
+      - run:
+          name: "Run Build step2"
+          command: |
+            $baseURL = 'https://cloud.appscan.com/api/V2'
+            $bearer_token =''
+            $jsonBody = "
+              {
+              `"KeyId`": `"$env:ASoC_API_Key`",
+              `"KeySecret`": `"$env:ASoC_API_Secret`"
+              }
+            "
+            $params = @{
+            Uri         = "$baseURL/Account/ApiKeyLogin"
+            Method      = 'POST'
+            Body        = $jsonBody
+            Headers = @{
+                'Content-Type' = 'application/json'
+            }
+            }
+            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls -bor [Net.SecurityProtocolType]::Tls11 -bor [Net.SecurityProtocolType]::Tls12
+            $Members = Invoke-RestMethod @params
+            Write-Host $Members
 
