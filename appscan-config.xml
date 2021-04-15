@@ -2,14 +2,22 @@
 <Configuration thirdParty="true">
   <Targets>
     <Target path="VulnerableCoreApp.sln">
-      <Exclude>AppData\Local\Temp\VulnerableCoreApp\wwwroot\lib\jquery-validation\dist\additional-methods.min.js</Exclude>
-      <Exclude>AppData\Local\Temp\VulnerableCoreApp\wwwroot\lib\jquery-validation\dist\jquery.validate.js</Exclude>
-      <Exclude>AppData\Local\Temp\VulnerableCoreApp\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js</Exclude>
-      <Exclude>AppData\Local\Temp\VulnerableCoreApp\wwwroot\lib\jquery\dist\jquery.min.js</Exclude>
-      <Exclude>AppData\Local\Temp\VulnerableCoreApp\wwwroot\lib\jquery\dist\jquery.js</Exclude>
-      <Exclude>AppData\Local\Temp\VulnerableCoreApp\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js</Exclude>
-      <Exclude>AppData\Local\Temp\VulnerableCoreApp\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js</Exclude>
-      <Exclude>AppData\Local\Temp\VulnerableCoreApp\wwwroot\lib\jquery-validation\dist\additional-methods.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\images\banner3.svg</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\jquery\dist\jquery.min.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\jquery-validation\dist\additional-methods.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\jquery-validation\dist\additional-methods.min.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\bootstrap\dist\js\npm.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\images\banner2.svg</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\bootstrap\dist\js\bootstrap.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\images\banner4.svg</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\jquery\dist\jquery.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\jquery-validation\dist\jquery.validate.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg</Exclude>
+      <Exclude>VulnerableCoreApp\wwwroot\images\banner1.svg</Exclude>
     </Target>
   </Targets>
 </Configuration>
