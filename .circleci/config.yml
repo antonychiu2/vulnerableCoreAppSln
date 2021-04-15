@@ -2,21 +2,29 @@
 version: 2.1
 # Use a package of configuration called an orb.
 orbs:
-  # Declare a dependency on the welcome-orb
   win: circleci/windows@2.2.0
 
 jobs:
   build:
     executor:
       name: win/default
+      shell: powershell.exe
+
     steps:
-      # default shell is Powershell
+      - restore_cache:
+          keys:
+            - v1-app
       - run:
-         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
-         shell: powershell.exe
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - save_cache:
+          key: v1-app
+          paths:
+            - C:\Users\circleci\.nuget\packages
       - run:
-         command: echo hello && echo world
-         shell: bash.exe
-      - run:
-         command: echo hello & echo world
-         shell: cmd.exe
+          name: "Run Build step"
+          command: dotnet.exe publish -c Release -r win-x64
+
+     
+
+
