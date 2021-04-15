@@ -66,6 +66,7 @@ jobs:
             Expand-Archive -Path "saclientutil.zip" -DestinationPath "saclientutil"
             .\saclientutil\SAClientUtil.8.0.1431\bin\appscan.bat prepare -c $env:ASoC_IRX_Config_file -n output.irx
             $irx_file = [IO.File]::ReadAllBytes('output.irx')
+            $params = @{
               Uri         = "$baseURL/FileUpload"
               Method      = 'Post'
               Headers = @{
