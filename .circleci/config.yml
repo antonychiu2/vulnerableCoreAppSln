@@ -29,6 +29,10 @@ jobs:
           name: "Run Build step2"
           command: |
             $baseURL = 'https://cloud.appscan.com/api/V2'
+            #$env:ASoC_IRX_Config_file = "C:\Users\circleci\project\appscan-config.xml"
+            $env:ASoC_appID = 'acd3ef50-6276-461d-8514-abc6e7113577'
+            $env:ASoC_scanName = 'test name2'
+            $env:ASoC_IRX_Config_file = "C:\Users\circleci\project\appscan-config.xml"
             $bearer_token =''
             $jsonBody = "
               {
@@ -47,4 +51,32 @@ jobs:
             [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls -bor [Net.SecurityProtocolType]::Tls11 -bor [Net.SecurityProtocolType]::Tls12
             $Members = Invoke-RestMethod @params
             Write-Host $Members
+            $bearer_token = $Members.token
+            $params = @{
+             Uri         = "$baseURL/Apps"
+              Method      = 'Get'
+              Headers = @{
+                    'Content-Type' = 'application/json'
+                    Authorization = "Bearer $bearer_token"
+                }
+            }
+            $Members2 = Invoke-RestMethod @params
+            $ProgressPreference = 'SilentlyContinue'
+            Invoke-WebRequest -Uri "https://cloud.appscan.com/api/Local/StaticAnalyzer/ARSATool" -OutFile "saclientutil.zip"
+            Expand-Archive -Path "saclientutil.zip" -DestinationPath "saclientutil"
+            .\saclientutil\SAClientUtil.8.0.1431\bin\appscan.bat prepare -c $env:ASoC_IRX_Config_file -n output.irx
+            $irx_file = [IO.File]::ReadAllBytes('output.irx')
+              Uri         = "$baseURL/FileUpload"
+              Method      = 'Post'
+              Headers = @{
+                    'Content-Type' = 'multipart/form-data'
+                    Authorization = "Bearer $bearer_token"
+                }
+               Form = @{
+                'fileToUpload' = Get-Item -Path "output.irx"
+             }
+            }
+            $upload = Invoke-RestMethod @params
+            $upload_File_ID = $upload.FileId
+            write-host "File ID: $upload_File_ID"
 
