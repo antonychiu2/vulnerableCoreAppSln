@@ -11,6 +11,7 @@ jobs:
       shell: powershell.exe
 
     steps:
+      - checkout
       - restore_cache:
           keys:
             - v1-app
