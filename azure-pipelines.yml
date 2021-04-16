@@ -12,7 +12,6 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
