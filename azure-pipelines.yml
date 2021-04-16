@@ -17,6 +17,6 @@ steps:
   inputs:
     AppSecTestService: 'ASOC Creds'
     applications: 'da95c1b0-b179-44e9-a7a2-feca877423bb'
-    scanname: 'dotNET core with sln attempt4'
+    scanname: 'Automated Scan from Azure DevOps'
     scantype: 'static'
     ScanSpeedOptions: 'thorough'
