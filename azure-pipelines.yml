@@ -12,7 +12,14 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-steps:
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '-r win-x64'
+    zipAfterPublish: false
+
 - task: HCLAppScan@1
   inputs:
     AppSecTestService: 'ASOC Creds'
