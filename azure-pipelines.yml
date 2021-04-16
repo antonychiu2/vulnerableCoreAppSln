@@ -11,7 +11,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  
+
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
@@ -23,7 +23,7 @@ steps:
     arguments: '-r win-x64'
     zipAfterPublish: false
 
-- task: HCLAppScan@1
+- task: HCLTechnologies.ApplicationSecurity-VSTS.custom-asoc-task.HCLAppScan@2
   inputs:
     AppSecTestService: 'ASOC Creds'
     applications: 'da95c1b0-b179-44e9-a7a2-feca877423bb'
