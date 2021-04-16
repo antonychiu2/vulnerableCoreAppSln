@@ -36,7 +36,7 @@ jobs:
           name: "Run Build step"
           command: dotnet.exe publish -c Release -r win-x64
       - run:
-          name: "Run AppScan Static Analysis"
+          name: "Run HCL AppScan Static Analysis"
           command: |
             $baseURL = 'https://cloud.appscan.com/api/V2'
             #$env:ASoC_IRX_Config_file = "C:\Users\circleci\project\appscan-config.xml"
