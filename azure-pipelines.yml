@@ -26,7 +26,7 @@ steps:
 - task: HCLTechnologies.ApplicationSecurity-VSTS.custom-asoc-task.HCLAppScan@2
   inputs:
     AppSecTestService: 'ASoC Credential'
-    applications: 'da95c1b0-b179-44e9-a7a2-feca877423bb'
+    applications: '6e1cba9b-e9bb-4c1c-8485-239ba7dfeee3'
     scanname: 'Automated Scan from Azure DevOps'
     scantype: 'static'
     ScanSpeedOptions: 'thorough'
