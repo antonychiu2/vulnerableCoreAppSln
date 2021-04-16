@@ -15,17 +15,17 @@ jobs:
           name: "Test"
           command: |
            $PSVersionTable
-           choco -?
+           $env:path
+           choco install powershell-core -y
 
 
 
           shell: powershell.exe
       - run:
-          name: "cmd"
+          name: "test PS ver"
           command: |
-             dir
-             choco -?
-          shell: cmd.exe
+             $PSVersionTable
+          shell: pwsh.exe
 
 
 
