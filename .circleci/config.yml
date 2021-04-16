@@ -41,7 +41,7 @@ jobs:
             $baseURL = 'https://cloud.appscan.com/api/V2'
             #$env:ASoC_IRX_Config_file = "C:\Users\circleci\project\appscan-config.xml"
             $env:ASoC_appID = 'acd3ef50-6276-461d-8514-abc6e7113577'
-            $env:ASoC_scanName = 'test name2'
+            $env:ASoC_scanName = 'Automated Scan from Circle CI'
             $env:ASoC_IRX_Config_file = "C:\Users\circleci\project\appscan-config.xml"
             $bearer_token =''
             $jsonBody = "
