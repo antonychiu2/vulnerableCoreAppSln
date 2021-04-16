@@ -8,6 +8,7 @@ jobs:
   build:
     executor:
       name: win/default
+      shell: powershell.exe
 
     steps:
       - run:
@@ -35,7 +36,7 @@ jobs:
           name: "Run Build step"
           command: dotnet.exe publish -c Release -r win-x64
       - run:
-          name: "Run HCL AppScan Static Analysis"
+          name: "Run AppScan Static Analysis"
           command: |
             $baseURL = 'https://cloud.appscan.com/api/V2'
             #$env:ASoC_IRX_Config_file = "C:\Users\circleci\project\appscan-config.xml"
@@ -59,17 +60,8 @@ jobs:
             }
             [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls -bor [Net.SecurityProtocolType]::Tls11 -bor [Net.SecurityProtocolType]::Tls12
             $Members = Invoke-RestMethod @params
-            Write-Host $Members
+            Write-Host "Auth successful - Token received: $Members.token"
             $bearer_token = $Members.token
-            $params = @{
-             Uri         = "$baseURL/Apps"
-              Method      = 'Get'
-              Headers = @{
-                    'Content-Type' = 'application/json'
-                    Authorization = "Bearer $bearer_token"
-                }
-            }
-            $Members2 = Invoke-RestMethod @params
             $ProgressPreference = 'SilentlyContinue'
             Invoke-WebRequest -Uri "https://cloud.appscan.com/api/Local/StaticAnalyzer/ARSATool" -OutFile "saclientutil.zip"
             Expand-Archive -Path "saclientutil.zip" -DestinationPath "saclientutil"
@@ -88,7 +80,28 @@ jobs:
             }
             $upload = Invoke-RestMethod @params
             $upload_File_ID = $upload.FileId
-            write-host "File ID: $upload_File_ID"
+            write-host "IRX Uploaded File ID: $upload_File_ID"
+            $params = @{
+                Uri         = "$baseURL/Scans/StaticAnalyzer"
+                Method      = 'Post'
+                Headers = @{
+                    'Content-Type' = 'application/json'
+                    Authorization = "Bearer $bearer_token"
+                }
+            }
+            $body = @{
+               'ApplicationFileId' = "$upload_File_ID"
+               'ScanName' = "$env:ASoC_scanName"
+               'EnableMailNotification' = "true"
+               'Locale' = "en-US"
+               'AppId' = "$env:ASoC_appID"
+               'Execute' = "true"
+               'FullyAutomatic' = "false"
+               'Personal' = "false"
+            }
+            $output_runscan = Invoke-RestMethod @params -Body ($body|ConvertTo-JSON)
+            write-host "Scan executed"
+            Write-Host $output_runscan
           shell: pwsh.exe
 
 
