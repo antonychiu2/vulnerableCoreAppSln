@@ -20,9 +20,22 @@ jobs:
           command: |
              $PSVersionTable
           shell: pwsh.exe
-
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-app
       - run:
-          name: "Run AppScan Static Analysis"
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - save_cache:
+          key: v1-app
+          paths:
+            - C:\Users\circleci\.nuget\packages
+      - run:
+          name: "Run Build step"
+          command: dotnet.exe publish -c Release -r win-x64
+      - run:
+          name: "Run HCL AppScan Static Analysis"
           command: |
             $baseURL = 'https://cloud.appscan.com/api/V2'
             #$env:ASoC_IRX_Config_file = "C:\Users\circleci\project\appscan-config.xml"
