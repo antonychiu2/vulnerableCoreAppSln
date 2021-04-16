@@ -2,7 +2,7 @@
 version: 2.1
 # Use a package of configuration called an orb.
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@2.4.0
 
 jobs:
   build:
@@ -26,7 +26,7 @@ jobs:
           name: "Run Build step"
           command: dotnet.exe publish -c Release -r win-x64
       - run:
-          name: "Run Build step2"
+          name: "Run AppScan Static Analysis"
           command: |
             $baseURL = 'https://cloud.appscan.com/api/V2'
             #$env:ASoC_IRX_Config_file = "C:\Users\circleci\project\appscan-config.xml"
