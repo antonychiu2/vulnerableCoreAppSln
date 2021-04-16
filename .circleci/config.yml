@@ -13,5 +13,18 @@ jobs:
     steps:
       - run:
           name: "Test"
-          command: $PSVersionTable
+          command: |
+           $PSVersionTable
+
+
+
+          shell: powershell.exe
+      - run:
+          name: "cmd"
+          command: |
+             dir
+             choco -?
+          shell: cmd.exe
+
+
 
