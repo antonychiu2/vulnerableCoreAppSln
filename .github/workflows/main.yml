@@ -50,6 +50,8 @@ jobs:
           $env:ASoC_scanName = $env:ASOC_SCAN_NAME
           $env:ASoC_IRX_Config_file = "appscan-config.xml"
           $bearer_token =''
+          
+          # ASoC - Login to ASoC with API Key and Secret
           $jsonBody = "
             {
             `"KeyId`": `"$env:ASOC_KEY`",
@@ -69,6 +71,9 @@ jobs:
           Write-Host "Auth successful - Token received: $Members.token"
           $bearer_token = $Members.token
           $ProgressPreference = 'SilentlyContinue'
+          
+          # ASoC -  download the latest version of SAClientUtil to generate the .irx in preparation for the scan
+          
           # Invoke-WebRequest -Uri "https://cloud.appscan.com/api/Local/StaticAnalyzer/ARSATool" -OutFile "saclientutil.zip"
           # Expand-Archive -Path "saclientutil.zip" -DestinationPath "saclientutil"
           # $SAClientUtilFolder = Get-ChildItem -Path .\saclientutil
@@ -76,7 +81,9 @@ jobs:
           # & $command prepare -c $env:ASoC_IRX_Config_file -n output.irx
           
           Invoke-WebRequest -Uri "https://cloud.appscan.com/api/V2/Tools/ScanDemoFiles/StaticAnalyzer" -OutFile "output.irx"
-          
+
+          # ASoC - Upload the .irx file onto ASoC
+
           $irx_file = [IO.File]::ReadAllBytes('output.irx')
           $params = @{
             Uri         = "$baseURL/FileUpload"
@@ -92,6 +99,9 @@ jobs:
           $upload = Invoke-RestMethod @params
           $upload_File_ID = $upload.FileId
           write-host "IRX Uploaded File ID: $upload_File_ID"
+          
+          # ASoC - Execute a Static (SAST) Scan on ASoC by specifying the upload_File_ID
+          
           $params = @{
             Uri         = "$baseURL/Scans/StaticAnalyzer"
             Method      = 'Post'
@@ -114,6 +124,9 @@ jobs:
           write-host "Scan executed"
           Write-Host $output_runscan
           $scan_ID = $output_runscan.Id
+          
+          # ASoC - Checking for scan completion status
+          
           $params = @{
             Uri         = "$baseURL/Scans/$scan_ID/Executions"
             Method      = 'Get'
@@ -129,6 +142,9 @@ jobs:
             Start-Sleep -Seconds 10
             Write-Host "Waiting for Scan Completion..."
           }
+          
+          # ASoC - Generate a HTML report on the completed scan by specifying the scan_ID
+          
           $params = @{
             Uri         = "$baseURL/Reports/Security/Scan/$scan_ID"
             Method      = 'Post'
@@ -184,9 +200,73 @@ jobs:
           }
           $output_runreport = Invoke-RestMethod @params
           Out-File -InputObject $output_runreport -FilePath .\AppScan_Security_Report.html
-
+          
+          # ASoC - Generate an XML report on the completed scan by specifying the scan_ID
+          
+          $params = @{
+            Uri         = "$baseURL/Reports/Security/Scan/$scan_ID"
+            Method      = 'Post'
+            Headers = @{
+              'Content-Type' = 'application/json'
+              Authorization = "Bearer $bearer_token"
+            }
+          }
+          $body = @{
+            'Configuration' = @{
+              'Summary' = "true"
+              'Details' = "true"
+              'Discussion' = "true"
+              'Overview' = "true"
+              'TableOfContent' = "true"
+              'Advisories' = "true"
+              'FixRecommendation' = "true"
+              'History' = "true"
+              'Coverage' = "true"
+              'MinimizeDetails' = "true"
+              'Articles' = "true"
+              'ReportFileType' = "XML"
+              'Title' = "false"
+              'Locale' = "en-US"
+            }
+          }
+          $output_runreport = Invoke-RestMethod @params -Body ($body|ConvertTo-JSON)
+          $report_ID = $output_runreport.Id
+          #Wait for report
+          $params = @{
+            Uri         = "$baseURL/Reports/$report_ID"
+            Method      = 'Get'
+            Headers = @{
+              'Content-Type' = 'application/json'
+              Authorization = "Bearer $bearer_token"
+            }
+          }
+          $report_status ="Not Ready"
+          while($report_status -ne "Ready"){
+            $output = Invoke-RestMethod @params
+            $report_status = $output.Status
+            Start-Sleep -Seconds 5
+            Write-Host "Generating XML Report... Progress: " $output.Progress "%"
+          }
+          #Download Report
+          $params = @{
+            Uri         = "$baseURL/Reports/Download/$report_ID"
+            Method      = 'Get'
+            Headers = @{
+              'Accept' = 'text/html'
+              Authorization = "Bearer $bearer_token"
+            }
+          }
+          $output_runreport = Invoke-RestMethod @params
+          Out-File -InputObject $output_runreport -FilePath .\AppScan_Security_Report.xml
+          
+          
         shell: pwsh
       - uses: actions/upload-artifact@v2
         with:
-          name: AppScan Scan Report
+          name: AppScan Static Analysis HTML Scan Report 
           path: AppScan_Security_Report.html
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: AppScan Static Analysis XML Scan Report 
+          path: AppScan_Security_Report.xml
