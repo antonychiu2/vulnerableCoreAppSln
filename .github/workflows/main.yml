@@ -38,8 +38,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Perform HCL AppScan Security Analysis
         env:
-          ASOC_KEY = ${{secrets.ASOC_API_KEY}}
-          ASOC_SECRET = ${{secrets.ASOC_API_SECRET}}
+          ASOC_KEY = ${{ secrets.ASOC_API_KEY }}
+          ASOC_SECRET = ${{ secrets.ASOC_API_SECRET }}
       
         run: |
           $baseURL = 'https://cloud.appscan.com/api/V2'
