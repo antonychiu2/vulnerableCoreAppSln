@@ -37,6 +37,10 @@ jobs:
         shell: pwsh
       # Runs a set of commands using the runners shell
       - name: Perform HCL AppScan Security Analysis
+        env:
+          ASOC_KEY = ${{secrets.ASOC_API_KEY}}
+          ASOC_SECRET = ${{secrets.ASOC_API_SECRET}}
+      
         run: |
           $baseURL = 'https://cloud.appscan.com/api/V2'
           $env:ASoC_appID = 'acd3ef50-6276-461d-8514-abc6e7113577'
@@ -45,8 +49,8 @@ jobs:
           $bearer_token =''
           $jsonBody = "
             {
-            `"KeyId`": `"${{env.ASOC_API_KEY}}`",
-            `"KeySecret`": `"{{$env.ASOC_API_SECRET}}`"
+            `"KeyId`": `"$env.ASOC_KEY`",
+            `"KeySecret`": `"$env.ASOC_SECRET`"
             }
           "
           $params = @{
@@ -62,8 +66,5 @@ jobs:
           Write-Host "Auth successful - Token received: $Members.token"
           $bearer_token = $Members.token
           Write-Host $bearer_token
-        env:
-          ASOC_API_KEY = ${{secrets.ASOC_API_KEY}}
-          ASOC_API_SECRET = ${{secrets.ASOC_API_SECRET}}
-          
+
         shell: pwsh
