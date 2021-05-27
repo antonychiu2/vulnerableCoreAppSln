@@ -45,8 +45,8 @@ jobs:
           $bearer_token =''
           $jsonBody = "
             {
-            `"KeyId`": `"2d0b57a0-9dcd-3787-9258-65b38d58b64a`",
-            `"KeySecret`": `"FHqgFNw9K/uxGd5uKYFjxEXBXLmgSNoaLw8r2NRoNQU=`"
+            `"KeyId`": `"$env.ASOC_API_KEY`",
+            `"KeySecret`": `"$env.ASOC_API_SECRET`"
             }
           "
           $params = @{
@@ -62,4 +62,8 @@ jobs:
           Write-Host "Auth successful - Token received: $Members.token"
           $bearer_token = $Members.token
           Write-Host $bearer_token
+        env:
+          ASOC_API_KEY = ${{secrets.ASOC_API_KEY}}
+          ASOC_API_SECRET = ${{secrets.ASOC_API_SECRET}}
+          
         shell: pwsh
