@@ -40,6 +40,7 @@ jobs:
         env:
           ASOC_KEY: ${{ secrets.ASOC_API_KEY }}
           ASOC_SECRET: ${{ secrets.ASOC_API_SECRET }}
+          TestVar: "abcd"
       
         run: |
           $baseURL = 'https://cloud.appscan.com/api/V2'
@@ -64,8 +65,9 @@ jobs:
           [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls -bor [Net.SecurityProtocolType]::Tls11 -bor [Net.SecurityProtocolType]::Tls12
           #$Members = Invoke-RestMethod @params
           write-host $jsonBody
-          write-host $env.ASOC_KEY
-          write-host $env.ASOC_SECRET
+          write-host "KEY IS: $env.ASOC_KEY"
+          write-host "SECRET IS: $env.ASOC_SECRET"
+          write-host "TestVar is: $env.TestVar"
           Write-Host "Auth successful - Token received: $Members.token"
           $bearer_token = $Members.token
           Write-Host $bearer_token
