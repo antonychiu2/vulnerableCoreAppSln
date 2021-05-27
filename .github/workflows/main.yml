@@ -38,6 +38,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Some random PS commands
         run: |
-          Write-Host ${{ASOC_API_KEY}}
-          Write-Host ${{ASOC_API_SECRET}}
+          Write-Host ${{env.ASOC_API_KEY}}
+          Write-Host ${{env.ASOC_API_SECRET}}
         shell: pwsh
