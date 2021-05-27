@@ -50,8 +50,8 @@ jobs:
           $bearer_token =''
           $jsonBody = "
             {
-            `"KeyId`": `"$env.ASOC_KEY`",
-            `"KeySecret`": `"$env.ASOC_SECRET`"
+            `"KeyId`": `"$env:ASOC_KEY`",
+            `"KeySecret`": `"$env:ASOC_SECRET`"
             }
           "
           $params = @{
@@ -65,9 +65,9 @@ jobs:
           [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls -bor [Net.SecurityProtocolType]::Tls11 -bor [Net.SecurityProtocolType]::Tls12
           #$Members = Invoke-RestMethod @params
           write-host $jsonBody
-          write-host "KEY IS: $env.ASOC_KEY"
-          write-host "SECRET IS: $env.ASOC_SECRET"
-          write-host "TestVar is: $env.TestVar"
-          write-host "GITHUB_WORKFLOW is: $env.GITHUB_WORKFLOW"
+          write-host "KEY IS: $env:ASOC_KEY"
+          write-host "SECRET IS: $env:ASOC_SECRET"
+          write-host "TestVar is: $env:TestVar"
+          write-host "GITHUB_WORKFLOW is: $env:GITHUB_WORKFLOW"
 
         shell: pwsh
