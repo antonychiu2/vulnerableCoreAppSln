@@ -30,3 +30,8 @@ jobs:
         run: |
           $PSVersionTable
         shell: pwsh
+      # Runs a set of commands using the runners shell
+      - name: list directory
+        run: |
+          ls
+        shell: pwsh
