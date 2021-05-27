@@ -47,7 +47,7 @@ jobs:
         run: |
           $baseURL = 'https://cloud.appscan.com/api/V2'
           $env:ASoC_appID = $env:ASOC_APPID
-          $env:ASoC_scanName = $env:SCAN_NAME
+          $env:ASoC_scanName = $env:ASOC_SCAN_NAME
           $env:ASoC_IRX_Config_file = "appscan-config.xml"
           $bearer_token =''
           $jsonBody = "
