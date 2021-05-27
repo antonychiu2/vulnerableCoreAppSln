@@ -46,7 +46,7 @@ jobs:
           $jsonBody = "
             {
             `"KeyId`": `"${{env:ASOC_API_KEY}}`",
-            `"KeySecret`": `"$env:ASOC_API_SECRET}}`"
+            `"KeySecret`": `"${{env:ASOC_API_SECRET}}`"
             }
           "
           $params = @{
