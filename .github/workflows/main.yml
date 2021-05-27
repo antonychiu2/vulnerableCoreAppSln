@@ -31,7 +31,7 @@ jobs:
           $PSVersionTable
         shell: pwsh
       # Runs a set of commands using the runners shell
-      - name: list directory
+      - name: List directory
         run: |
           ls
         shell: pwsh
@@ -262,11 +262,13 @@ jobs:
           
         shell: pwsh
       - uses: actions/upload-artifact@v2
+        name: Upload HCL AppScan Static Analysis HTML Report to Github Artifacts
         with:
           name: AppScan Static Analysis HTML Scan Report 
           path: AppScan_Security_Report.html
           
       - uses: actions/upload-artifact@v2
+        name: Upload HCL AppScan Static Analysis XML Report to Github Artifacts
         with:
           name: AppScan Static Analysis XML Scan Report 
           path: AppScan_Security_Report.xml
