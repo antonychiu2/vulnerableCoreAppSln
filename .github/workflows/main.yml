@@ -45,8 +45,8 @@ jobs:
           $bearer_token =''
           $jsonBody = "
             {
-            `"KeyId`": `"${{env:ASOC_API_KEY}}`",
-            `"KeySecret`": `"${{env:ASOC_API_SECRET}}`"
+            `"KeyId`": `"2d0b57a0-9dcd-3787-9258-65b38d58b64a`",
+            `"KeySecret`": `"FHqgFNw9K/uxGd5uKYFjxEXBXLmgSNoaLw8r2NRoNQU=`"
             }
           "
           $params = @{
