@@ -66,11 +66,9 @@ jobs:
             
             # ASoC -  Download the latest version of SAClientUtil to generate the .irx in preparation for the scan
             Write-Host "Downloading latest verion of SAClientUtil..."
-            Invoke-WebRequest -Uri "https://cloud.appscan.com/api/Local/StaticAnalyzer/ARSATool" -OutFile "saclientutil.zip"
-            Expand-Archive -Path "saclientutil.zip" -DestinationPath "saclientutil"
-            $SAClientUtilFolder = Get-ChildItem -Path .\saclientutil
-            $command = ".\saclientutil\" + $SAClientUtilFolder.name + "\bin\appscan.bat"
-            & $command prepare -c $env:ASoC_IRX_Config_file -n output.irx
+            
+            # Comment out this lines for a proper .irx generation. This line is for demo purposes, it only downloads a sample .irx file that is not related to the source code in this repo
+            Invoke-WebRequest -Uri "https://cloud.appscan.com/api/V2/Tools/ScanDemoFiles/StaticAnalyzer" -OutFile "output.irx"
 
 
             $irx_file = [IO.File]::ReadAllBytes('output.irx')
