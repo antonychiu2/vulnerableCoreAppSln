@@ -23,10 +23,11 @@ steps:
     arguments: '-r win-x64'
     zipAfterPublish: false
 
-- task: HCLTechnologies.ApplicationSecurity-VSTS.custom-asoc-task.HCLAppScan@2
+- task: HCLAppScanOnCloud@2
   inputs:
-    AppSecTestService: 'ASoC Credential'
+    AppSecTestService: 'ASOC Creds'
     applications: '6e1cba9b-e9bb-4c1c-8485-239ba7dfeee3'
-    scanname: 'Automated Scan from Azure DevOps'
+    scanname: 'Scan_2022-03-10'
     scantype: 'static'
-    ScanSpeedOptions: 'thorough'
+    ScanSpeedOptions: 'balanced'
+    email: true
