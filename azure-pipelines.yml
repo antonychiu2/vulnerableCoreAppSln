@@ -27,5 +27,6 @@ steps:
   inputs:
     AppSecTestService: 'ASoC Credential'
     applications: '04558522-9006-46d3-b8c2-52fec00e0f2e'
-    scanname: 'ADO Scan'
+    scanname: 'ADO scan'
     scantype: 'static'
+    FailBuildConfiguration: true
