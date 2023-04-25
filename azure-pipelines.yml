@@ -25,9 +25,7 @@ steps:
 
 - task: HCLAppScanOnCloud@2
   inputs:
-    AppSecTestService: 'ASOC Creds'
-    applications: '6e1cba9b-e9bb-4c1c-8485-239ba7dfeee3'
-    scanname: 'Scan_2022-03-10'
+    AppSecTestService: 'ASoC Credential'
+    applications: '04558522-9006-46d3-b8c2-52fec00e0f2e'
+    scanname: 'ADO Scan'
     scantype: 'static'
-    ScanSpeedOptions: 'balanced'
-    email: true
